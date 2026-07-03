@@ -19,7 +19,7 @@ function Home() {
   });
 
   return (
-    <div className="p-8">
+    <div className="p-6">
       <ImagesTable images={images} />
     </div>
   );

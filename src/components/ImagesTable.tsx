@@ -1,10 +1,14 @@
-import { argv0 } from "process";
+import { categoriesAbbreviationMap } from "#/constants/images";
+import { Link } from "@tanstack/react-router";
 
 type ImageTableItem = {
   id: number;
   categoryId: number;
   number: number;
-  recipients: string[];
+  recipients: {
+    name: string[];
+    isDelivered: boolean;
+  };
 };
 
 type Props = {
@@ -15,7 +19,7 @@ export function ImagesTable({ images }: Props) {
   return (
     <div className="overflow-x-auto rounded-lg border border-gray-200">
       <table className="min-w-full divide-y divide-gray-200">
-        <thead className="bg-gray-50">
+        <thead className="bg-gray-100">
           <tr>
             <th className="px-4 py-2 text-left text-xs font-bold text-gray-500 uppercase w-16">
               #
@@ -29,16 +33,27 @@ export function ImagesTable({ images }: Props) {
 
         <tbody className="divide-y divide-gray-200 bg-white">
           {images.map((image) => (
-            <tr key={image.id} className="hover:bg-gray-50">
-              <td className="px-4 py-2 text-sm text-gray-500">
-                {image.categoryId}-{image.number}
-              </td>
-              <td className="px-4 py-2 text-sm text-gray-900">
-                {image.recipients.length > 0
-                  ? image.recipients.join(", ")
-                  : "-"}
-              </td>
-            </tr>
+            <Link
+              to="/image/$id"
+              params={{ id: String(image.id) }}
+              className="contents"
+            >
+              <tr
+                key={image.id}
+                className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-100" : ""}`}
+              >
+                <td className="px-4 py-2 text-sm text-gray-500 font-mono">
+                  {categoriesAbbreviationMap[image.categoryId]}-{image.number}
+                </td>
+                <td className="px-4 py-2 text-sm text-gray-900">
+                  {image.recipients.length > 0
+                    ? image.recipients
+                        .map((recipient) => recipient.name)
+                        .join(", ")
+                    : "-"}
+                </td>
+              </tr>
+            </Link>
           ))}
         </tbody>
       </table>
