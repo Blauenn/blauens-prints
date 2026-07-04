@@ -75,14 +75,13 @@ function RouteComponent() {
         <div className="">
           <div className="">
             <h1 className="text-sm opacity-50 mb-2">Recipients</h1>
-            {image.recipients.map((recipient, index) => (
-              <h1
-                key={index}
-                className={`text-2xl font-bold ${recipient.isDelivered ? "text-green-400" : ""}`}
-              >
-                {recipient.name}
-              </h1>
-            ))}
+            <div className="flex flex-col gap-2">
+              {image.recipients.map((recipient, index) => (
+                <h1 key={index} className="text-2xl font-bold">
+                  {recipient.name}
+                </h1>
+              ))}
+            </div>
           </div>
         </div>
       </div>

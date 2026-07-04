@@ -32,29 +32,37 @@ export function ImagesTable({ images }: Props) {
         </thead>
 
         <tbody className="divide-y divide-gray-200 bg-white">
-          {images.map((image) => (
-            <Link
-              to="/image/$id"
-              params={{ id: String(image.id) }}
-              className="contents"
-            >
-              <tr
-                key={image.id}
-                className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-100" : ""}`}
+          {images.length > 0 ? (
+            images.map((image) => (
+              <Link
+                to="/image/$id"
+                params={{ id: String(image.id) }}
+                className="contents"
               >
-                <td className="px-4 py-2 text-sm text-gray-500 font-mono">
-                  {categoriesAbbreviationMap[image.categoryId]}-{image.number}
-                </td>
-                <td className="px-4 py-2 text-sm text-gray-900">
-                  {image.recipients.length > 0
-                    ? image.recipients
-                        .map((recipient) => recipient.name)
-                        .join(", ")
-                    : "-"}
-                </td>
-              </tr>
-            </Link>
-          ))}
+                <tr
+                  key={image.id}
+                  className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-100" : ""}`}
+                >
+                  <td className="px-4 py-2 text-sm text-gray-500 font-mono">
+                    {categoriesAbbreviationMap[image.categoryId]}-{image.number}
+                  </td>
+                  <td className="px-4 py-2 text-sm text-gray-900">
+                    {image.recipients.length > 0
+                      ? image.recipients
+                          .map((recipient) => recipient.name)
+                          .join(", ")
+                      : "-"}
+                  </td>
+                </tr>
+              </Link>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={2} className="px-4 py-2 text-sm text-gray-500">
+                No images found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

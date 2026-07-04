@@ -7,3 +7,14 @@
     --font-sans: "Google Sans", sans-serif;
     --font-mono: "JetBrains Mono", monospace;
 }
+
+/* Grid background */
+body {
+  background-color: #fafafa;
+
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+
+  background-size: 24px 24px;
+}
