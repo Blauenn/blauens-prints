@@ -1,4 +1,5 @@
 import { nearestApertureStop } from "#/functions/aperture";
+import { formatShutterSpeed } from "#/functions/exposureTime";
 import { getImageById } from "#/server/images";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
@@ -47,14 +48,14 @@ function RouteComponent() {
               {image.createdAt &&
                 new Intl.DateTimeFormat("en-GB", {
                   dateStyle: "short",
-                  timeZone: "UTC",
+                  timeZone: "Asia/Bangkok",
                 }).format(new Date(image.createdAt))}
             </h1>
             <h1 className="text-sm opacity-50">
               {image.createdAt &&
                 new Intl.DateTimeFormat("en-GB", {
                   timeStyle: "medium",
-                  timeZone: "UTC",
+                  timeZone: "Asia/Bangkok",
                 }).format(new Date(image.createdAt))}
             </h1>
           </div>
@@ -65,7 +66,9 @@ function RouteComponent() {
           />
           <div className="flex flex-row justify-between">
             <h1 className="text-sm opacity-50">{image.shotFocalLength}mm</h1>
-            <h1 className="text-sm opacity-50">{image.shutter}s</h1>
+            <h1 className="text-sm opacity-50">
+              {formatShutterSpeed(image.exposureTime)}s
+            </h1>
             <h1 className="text-sm opacity-50">
               f/{nearestApertureStop(image.aperture)}
             </h1>

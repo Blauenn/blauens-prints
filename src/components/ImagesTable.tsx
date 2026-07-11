@@ -1,7 +1,4 @@
-import {
-  categoriesAbbreviationMap,
-  categoriesColorMap,
-} from "#/constants/images";
+import { categoriesColorMap } from "#/constants/images";
 import { Link } from "@tanstack/react-router";
 
 type ImageTableItem = {
@@ -44,7 +41,7 @@ export function ImagesTable({ images }: Props) {
               >
                 <tr
                   key={image.id}
-                  className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-200" : ""}`}
+                  className={`${image.recipients.every((recipient) => recipient.deliveredAt !== null) ? "bg-green-200" : ""}`}
                 >
                   <td className="pl-3 pr-1 py-2 text-sm font-mono">
                     <div

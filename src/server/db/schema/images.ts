@@ -37,7 +37,7 @@ export const images = pgTable(
     focalLengthMax: integer("focal_length_max"),
 
     iso: integer("iso"),
-    shutter: varchar("shutter", { length: 32 }),
+    exposureTime: varchar("exposureTime", { length: 32 }),
     aperture: real("aperture"),
     shotFocalLength: real("shot_focal_length"),
     flash: boolean("flash"),
