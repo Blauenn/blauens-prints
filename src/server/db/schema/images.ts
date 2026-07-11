@@ -6,41 +6,45 @@ import {
   serial,
   timestamp,
   varchar,
+  unique,
 } from "drizzle-orm/pg-core";
+import { categories } from "./categories";
 
-export const images = pgTable("images", {
-  id: serial("id").primaryKey(),
+export const images = pgTable(
+  "images",
+  {
+    id: serial("id").primaryKey(),
 
-  categoryId: integer("category_id"),
-  printLabId: integer("print_lab_id"),
+    categoryId: integer("category_id")
+      .references(() => categories.id)
+      .notNull(),
 
-  filename: varchar("filename", { length: 255 }).notNull(),
-  number: integer("number"),
-  title: varchar("title", { length: 255 }),
+    filename: varchar("filename", { length: 255 }).notNull(),
+    number: integer("number"),
+    title: varchar("title", { length: 255 }),
 
-  imageUrl: varchar("image_url", { length: 2048 }).notNull(),
-  thumbnailUrl: varchar("thumbnail_url", { length: 2048 }),
+    imageUrl: varchar("image_url", { length: 255 }).notNull(),
+    thumbnailUrl: varchar("thumbnail_url", { length: 255 }),
 
-  isPrinted: boolean("is_printed").default(false),
+    width: integer("width"),
+    height: integer("height"),
 
-  sentToLabAt: timestamp("sent_to_lab_at"),
-  receivedFromLabAt: timestamp("received_from_lab_at"),
+    cameraName: varchar("camera_name", { length: 64 }),
+    cameraModel: varchar("camera_model", { length: 64 }),
+    lensModel: varchar("lens_model", { length: 64 }),
 
-  width: integer("width"),
-  height: integer("height"),
+    focalLength: integer("focal_length"),
+    focalLengthMax: integer("focal_length_max"),
 
-  cameraName: varchar("camera_name", { length: 255 }),
-  cameraModel: varchar("camera_model", { length: 255 }),
-  lensModel: varchar("lens_model", { length: 255 }),
+    iso: integer("iso"),
+    shutter: varchar("shutter", { length: 32 }),
+    aperture: real("aperture"),
+    shotFocalLength: real("shot_focal_length"),
+    flash: boolean("flash"),
 
-  focalLength: integer("focal_length"),
-  focalLengthMax: integer("focal_length_max"),
-
-  iso: integer("iso"),
-  shutter: varchar("shutter", { length: 32 }),
-  aperture: real("aperture"),
-  shotFocalLength: real("shot_focal_length"),
-  flash: boolean("flash"),
-
-  createdAt: timestamp("created_at").defaultNow(),
-});
+    createdAt: timestamp("created_at"),
+  },
+  (table) => ({
+    uniqueImageNumber: unique().on(table.categoryId, table.number),
+  }),
+);

@@ -13,7 +13,7 @@ export const imageTags = pgTable(
       .notNull()
       .references(() => tags.id),
   },
-  (t) => ({
-    pk: primaryKey({ columns: [t.imageId, t.tagId] }),
+  (table) => ({
+    pk: primaryKey({ columns: [table.imageId, table.tagId] }),
   }),
 );
