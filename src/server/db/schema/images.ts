@@ -21,7 +21,6 @@ export const images = pgTable(
 
     filename: varchar("filename", { length: 255 }).notNull(),
     number: integer("number"),
-    title: varchar("title", { length: 255 }),
 
     imageUrl: varchar("image_url", { length: 255 }).notNull(),
     thumbnailUrl: varchar("thumbnail_url", { length: 255 }),
