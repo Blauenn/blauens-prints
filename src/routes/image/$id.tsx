@@ -65,7 +65,9 @@ function RouteComponent() {
             className="w-full max-h-[60vh] object-contain rounded-xl"
           />
           <div className="flex flex-row justify-between">
-            <h1 className="text-sm opacity-50">{image.shotFocalLength}mm</h1>
+            <h1 className="text-sm opacity-50">
+              {Math.round(image.shotFocalLength)}mm
+            </h1>
             <h1 className="text-sm opacity-50">
               {formatShutterSpeed(image.exposureTime)}s
             </h1>

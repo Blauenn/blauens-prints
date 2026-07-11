@@ -44,7 +44,7 @@ export function ImagesTable({ images }: Props) {
                     params: { id: String(image.id) },
                   })
                 }
-                className={`${image.recipients.every((recipient) => recipient.deliveredAt !== null) ? "bg-green-200" : ""}`}
+                className={`${image.recipients.every((recipient) => recipient.deliveredAt !== null) ? "bg-green-100" : ""}`}
               >
                 <td className="pl-3 pr-1 py-2 text-sm font-mono">
                   <div
