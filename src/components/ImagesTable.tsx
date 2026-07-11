@@ -1,4 +1,7 @@
-import { categoriesAbbreviationMap } from "#/constants/images";
+import {
+  categoriesAbbreviationMap,
+  categoriesColorMap,
+} from "#/constants/images";
 import { Link } from "@tanstack/react-router";
 
 type ImageTableItem = {
@@ -41,11 +44,16 @@ export function ImagesTable({ images }: Props) {
               >
                 <tr
                   key={image.id}
-                  className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-100" : ""}`}
+                  className={`${image.recipients.every((recipient) => recipient.isDelivered) ? "bg-green-200" : ""}`}
                 >
-                  <td className="px-4 py-2 text-sm text-gray-500 font-mono">
-                    {categoriesAbbreviationMap[image.categoryId]}-{image.number}
+                  <td className="pl-3 pr-1 py-2 text-sm font-mono">
+                    <div
+                      className={`px-2 py-1 rounded-lg text-center ${categoriesColorMap[image.categoryId]}`}
+                    >
+                      {image.number}
+                    </div>
                   </td>
+
                   <td className="px-4 py-2 text-sm text-gray-900">
                     {image.recipients.length > 0
                       ? image.recipients

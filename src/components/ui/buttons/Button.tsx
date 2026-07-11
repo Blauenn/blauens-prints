@@ -13,7 +13,7 @@ export default function Button({ label }: Props) {
     <button
       type="button"
       onClick={handleFilterClick}
-      className="flex items-center justify-center px-4 rounded-lg bg-white border border-gray-200 hover:bg-gray-50 cursor-pointer"
+      className="flex items-center justify-center px-4 rounded-xl bg-white border border-gray-200 hover:bg-gray-50 cursor-pointer"
     >
       <span className="text-sm text-gray-500">{label}</span>
     </button>
