@@ -6,6 +6,7 @@ import {
   serial,
   timestamp,
   varchar,
+  text,
   unique,
 } from "drizzle-orm/pg-core";
 import { categories } from "./categories";
@@ -40,6 +41,8 @@ export const images = pgTable(
     aperture: real("aperture"),
     shotFocalLength: real("shot_focal_length"),
     flash: boolean("flash"),
+
+    keywords: text("keywords").array(),
 
     createdAt: timestamp("created_at"),
   },
